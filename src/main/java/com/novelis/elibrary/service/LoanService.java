@@ -60,6 +60,8 @@ public class LoanService {
 
         if (book.getAvailableCopies() == null || book.getAvailableCopies() <= 0) {
             throw new BusinessException("No available copies for book with id " + bookId);
+        }else{
+            book.setAvailableCopies(book.getAvailableCopies() - 1);
         }
 
         // Optional rule: prevent multiple active loans for the same book by the same user

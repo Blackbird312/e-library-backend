@@ -9,7 +9,10 @@ public class UserRequest {
     @NotBlank(message = "Email is required")
     private String email;
 
-//    Setters and getters
+    @NotBlank
+    private String password;
+
+    //    Setters and getters
     public String getFullName() {
         return fullName;
     }
@@ -25,4 +28,13 @@ public class UserRequest {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }

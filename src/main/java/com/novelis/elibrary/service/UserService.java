@@ -3,6 +3,7 @@ package com.novelis.elibrary.service;
 import com.novelis.elibrary.entity.User;
 import com.novelis.elibrary.exception.NotFoundException;
 import com.novelis.elibrary.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,10 +12,13 @@ import java.util.List;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
+
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -27,6 +31,7 @@ public class UserService {
 
     public User create(User user) {
         // here you can add validation / defaults / business rules
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 

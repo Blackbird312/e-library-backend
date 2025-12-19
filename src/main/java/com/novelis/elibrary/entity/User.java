@@ -24,9 +24,13 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @NotBlank
+    @Column(nullable = false)
+    private String password;
+
     private LocalDate membershipDate = LocalDate.now();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Loan> loans = new ArrayList<>();
 
     // ===== Constructors =====
@@ -60,6 +64,14 @@ public class User {
         this.email = email;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public LocalDate getMembershipDate() {
         return membershipDate;
     }
@@ -75,4 +87,6 @@ public class User {
     public void setLoans(List<Loan> loans) {
         this.loans = loans;
     }
+
+
 }

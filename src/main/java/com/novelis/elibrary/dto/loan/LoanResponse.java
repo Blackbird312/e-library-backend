@@ -1,22 +1,19 @@
 package com.novelis.elibrary.dto.loan;
 
+
 import java.time.LocalDate;
 
 public class LoanResponse {
 
     private Long id;
-
-    private Long userId;
-    private String userName;
-
-    private Long bookId;
-    private String bookTitle;
-
+    private LoanUserDTO user;
+    private LoanBookDTO book;
     private LocalDate loanDate;
     private LocalDate dueDate;
     private LocalDate returnDate;
-
     private boolean returned;
+
+
 
     // ==== Getters & Setters ====
     public Long getId() {
@@ -27,37 +24,6 @@ public class LoanResponse {
         this.id = id;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public Long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
-    }
-
-    public String getBookTitle() {
-        return bookTitle;
-    }
-
-    public void setBookTitle(String bookTitle) {
-        this.bookTitle = bookTitle;
-    }
 
     public LocalDate getLoanDate() {
         return loanDate;
@@ -89,5 +55,21 @@ public class LoanResponse {
 
     public void setReturned(boolean returned) {
         this.returned = returned;
+    }
+
+    public LoanUserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(LoanUserDTO user) {
+        this.user = user;
+    }
+
+    public LoanBookDTO getBook() {
+        return book;
+    }
+
+    public void setBook(LoanBookDTO book) {
+        this.book = book;
     }
 }
