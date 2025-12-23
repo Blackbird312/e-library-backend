@@ -1,4 +1,4 @@
-package com.novelis.elibrary.service;
+package com.novelis.elibrary.service.book;
 
 import com.novelis.elibrary.entity.Book;
 import com.novelis.elibrary.exception.NotFoundException;

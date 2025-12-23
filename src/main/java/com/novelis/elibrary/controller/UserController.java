@@ -7,6 +7,8 @@ import com.novelis.elibrary.mapper.UserMapper;
 import com.novelis.elibrary.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +23,12 @@ public class UserController {
     public UserController(UserService userService, UserMapper userMapper){
         this.userMapper = userMapper;
         this.userService = userService;
+    }
+
+    @GetMapping("/me")
+    public UserResponse me(@AuthenticationPrincipal Jwt jwt) {
+        String email = jwt.getSubject();              // sub
+        return userService.getUserResponseByEmail(email);
     }
 
     @GetMapping

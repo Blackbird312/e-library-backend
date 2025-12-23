@@ -1,10 +1,10 @@
-package com.novelis.elibrary.controller;
+package com.novelis.elibrary.controller.book;
 
 import com.novelis.elibrary.dto.book.BookRequest;
 import com.novelis.elibrary.dto.book.BookResponse;
 import com.novelis.elibrary.entity.Book;
 import com.novelis.elibrary.mapper.BookMapper;
-import com.novelis.elibrary.service.BookService;
+import com.novelis.elibrary.service.book.BookService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

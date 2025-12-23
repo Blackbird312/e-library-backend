@@ -8,6 +8,7 @@ public class BookResponse {
     private Integer publicationYear;
     private Integer totalCopies;
     private Integer availableCopies;
+    private String coverImage;
 
     // ==== Getters & Setters ====
     public Long getId() {
@@ -57,4 +58,8 @@ public class BookResponse {
     public void setAvailableCopies(Integer availableCopies) {
         this.availableCopies = availableCopies;
     }
+
+    public String getCoverImage(){return coverImage;}
+
+    public void setCoverImage(String coverImage){this.coverImage = coverImage;}
 }

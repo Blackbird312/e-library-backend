@@ -14,7 +14,6 @@ public class LoanResponse {
     private boolean returned;
 
 
-
     // ==== Getters & Setters ====
     public Long getId() {
         return id;

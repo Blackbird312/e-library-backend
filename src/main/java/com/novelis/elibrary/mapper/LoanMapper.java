@@ -31,6 +31,7 @@ public class LoanMapper {
 //            bookDTO.setAuthor(loan.getBook().getAuthor());
             bookDTO.setIsbn(loan.getBook().getIsbn());
             bookDTO.setAvailableCopies(loan.getBook().getAvailableCopies());
+            bookDTO.setCoverImage(loan.getBook().getCoverImage());
             dto.setBook(bookDTO);
         }
 

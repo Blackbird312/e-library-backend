@@ -13,4 +13,5 @@ public class LoanBookDTO {
     private String author;
     private String isbn;
     private Integer availableCopies;
+    private String coverImage;
 }

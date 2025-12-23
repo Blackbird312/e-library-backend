@@ -1,5 +1,6 @@
 package com.novelis.elibrary.entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,16 +31,20 @@ public class Book {
     @NotNull
     private Integer availableCopies = 1;
 
+    @Nullable
+    private String coverImage;
+
     // ===== Constructors =====
     public Book() {
     }
 
-    public Book(String title, String isbn, Integer publicationYear, Integer totalCopies) {
+    public Book(String title, String isbn, Integer publicationYear, Integer totalCopies, String coverImage) {
         this.title = title;
         this.isbn = isbn;
         this.publicationYear = publicationYear;
         this.totalCopies = totalCopies;
         this.availableCopies = totalCopies;
+        this.coverImage = coverImage;
     }
 
     // ===== Getters & Setters =====
@@ -86,4 +91,8 @@ public class Book {
     public void setAvailableCopies(Integer availableCopies) {
         this.availableCopies = availableCopies;
     }
+
+    public String getCoverImage(){return coverImage;}
+
+    public void setCoverImage(String coverImage){this.coverImage = coverImage;}
 }
