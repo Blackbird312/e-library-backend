@@ -33,6 +33,7 @@ public class BookMapper {
         dto.setPublicationYear(book.getPublicationYear());
         dto.setTotalCopies(book.getTotalCopies());
         dto.setAvailableCopies(book.getAvailableCopies());
+        dto.setCoverImage(book.getCoverImage());
         return dto;
     }
 }

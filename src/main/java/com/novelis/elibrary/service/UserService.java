@@ -25,7 +25,6 @@ public class UserService {
         this.loanRepository = loanRepository;
     }
 
-
     public List<User> findAll() {
         return userRepository.findAll();
     }

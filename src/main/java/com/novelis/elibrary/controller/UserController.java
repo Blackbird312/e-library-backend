@@ -25,11 +25,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/me")
-    public UserResponse me(@AuthenticationPrincipal Jwt jwt) {
-        String email = jwt.getSubject();              // sub
-        return userService.getUserResponseByEmail(email);
-    }
+
 
     @GetMapping
     public List<UserResponse> getAllUsers(){

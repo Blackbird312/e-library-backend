@@ -1,15 +1,20 @@
 package com.novelis.elibrary.service;
 
+import com.novelis.elibrary.dto.loan.LoanResponse;
+import com.novelis.elibrary.dto.user.UserResponse;
 import com.novelis.elibrary.entity.Book;
 import com.novelis.elibrary.entity.Loan;
 import com.novelis.elibrary.entity.User;
 import com.novelis.elibrary.exception.BusinessException;
 import com.novelis.elibrary.exception.NotFoundException;
+import com.novelis.elibrary.mapper.LoanMapper;
 import com.novelis.elibrary.repository.BookRepository;
 import com.novelis.elibrary.repository.LoanRepository;
 import com.novelis.elibrary.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,13 +25,15 @@ public class LoanService {
     private final LoanRepository loanRepository;
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
+    private final LoanMapper loanMapper;
 
     public LoanService(LoanRepository loanRepository,
                        UserRepository userRepository,
-                       BookRepository bookRepository) {
+                       BookRepository bookRepository, LoanMapper loanMapper) {
         this.loanRepository = loanRepository;
         this.userRepository = userRepository;
         this.bookRepository = bookRepository;
+        this.loanMapper = loanMapper;
     }
 
     // ===== Query methods =====
@@ -147,5 +154,12 @@ public class LoanService {
     private Loan getLoanOrThrow(Long loanId) {
         return loanRepository.findById(loanId)
                 .orElseThrow(() -> new NotFoundException("Loan not found with id " + loanId));
+    }
+
+    public List<LoanResponse> getMyLoans(String email) {
+        return loanRepository.findByUser_EmailOrderByLoanDateDesc(email)
+                .stream()
+                .map(loanMapper::toResponse)
+                .toList();
     }
 }

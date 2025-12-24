@@ -12,4 +12,6 @@ public interface LoanRepository extends JpaRepository<Loan, Long> {
     List<Loan> findByBookId(Long bookId);
 
     int countByUserId(Long userId);
+
+    List<Loan> findByUser_EmailOrderByLoanDateDesc(String email);
 }
