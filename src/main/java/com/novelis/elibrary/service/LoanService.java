@@ -162,4 +162,39 @@ public class LoanService {
                 .map(loanMapper::toResponse)
                 .toList();
     }
+
+    public Loan IBorrowBook(String email, Long bookId, LocalDate dueDate){
+        //repository to create loan with user email and book id
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(()-> new NotFoundException("User not found by this email."));
+
+        Book book = getBookOrThrow(bookId);
+
+        if(book.getAvailableCopies() == null || book.getAvailableCopies() <= 0){
+            throw new BusinessException("No available copies for book with id " + bookId);
+        }
+
+        if(loanRepository.existsByUser_EmailAndBook_IdAndReturnDateIsNull(email, bookId)){
+            throw new BusinessException("This email : " + email + " already has an active loan for book " + bookId);
+        }
+
+        if(dueDate == null){
+            throw new BusinessException("Due date is required");
+        }
+
+        if(dueDate.isBefore(LocalDate.now())){
+            throw new BusinessException("Due date cannot be in the past");
+        }
+
+        book.setAvailableCopies(book.getAvailableCopies() - 1);
+
+        Loan loan = new Loan();
+        loan.setUser(user);
+        loan.setBook(book);
+        loan.setLoanDate(LocalDate.now());
+        loan.setDueDate(dueDate);
+        loan.setReturnDate(null);
+
+        return loanRepository.save(loan);
+    }
 }

@@ -9,7 +9,10 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-public class LoanRequest {
+public class AdminLoanRequest {
+
+    @NotNull(message = "User id is required")
+    private Long userId;
 
     @NotNull(message = "Book id is required")
     private Long bookId;
@@ -17,4 +20,5 @@ public class LoanRequest {
     @NotNull(message = "Due date is required")
     @FutureOrPresent(message = "Due date cannot be in the past")
     private LocalDate dueDate;
+
 }

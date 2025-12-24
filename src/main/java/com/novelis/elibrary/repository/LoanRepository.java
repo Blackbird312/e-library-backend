@@ -14,4 +14,6 @@ public interface LoanRepository extends JpaRepository<Loan, Long> {
     int countByUserId(Long userId);
 
     List<Loan> findByUser_EmailOrderByLoanDateDesc(String email);
+
+    boolean existsByUser_EmailAndBook_IdAndReturnDateIsNull(String email, Long bookId);
 }

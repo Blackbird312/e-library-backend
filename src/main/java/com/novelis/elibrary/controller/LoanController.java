@@ -1,5 +1,6 @@
 package com.novelis.elibrary.controller;
 
+import com.novelis.elibrary.dto.loan.AdminLoanRequest;
 import com.novelis.elibrary.dto.loan.LoanRequest;
 import com.novelis.elibrary.dto.loan.LoanResponse;
 import com.novelis.elibrary.entity.Loan;
@@ -36,9 +37,23 @@ public class LoanController {
     // POST /api/loans/borrow
     @PostMapping("/borrow")
     @ResponseStatus(HttpStatus.CREATED)
-    public LoanResponse borrowBook(@Valid @RequestBody LoanRequest request) {
+    public LoanResponse borrowBook(@Valid @RequestBody AdminLoanRequest request) {
         Loan loan = loanService.borrowBook(
                 request.getUserId(),
+                request.getBookId(),
+                request.getDueDate()
+        );
+        return loanMapper.toResponse(loan);
+    }
+
+    // POST /api/loans/IBorrow
+    @PostMapping("/iborrow")
+    @ResponseStatus(HttpStatus.CREATED)
+    public LoanResponse userBorrowsBook(@Valid @RequestBody LoanRequest request,
+                                        @AuthenticationPrincipal Jwt jwt) {
+        String email = jwt.getSubject();
+        Loan loan = loanService.IBorrowBook(
+                email,
                 request.getBookId(),
                 request.getDueDate()
         );
